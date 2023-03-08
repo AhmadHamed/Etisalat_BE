@@ -1,15 +1,16 @@
-drop view if exists customerView;
-create view customerView as
-select id,
-       phone,
-       substr(phone, 2, 3)
-           as countryCode,
-       case
-           when phone like '(237)%' then 'Cameroon'
-           when phone like '(251)%' then 'Ethiopia'
-           when phone like '(212)%' then 'Morocco'
-           when phone like '(258)%' then 'Mozambique'
-           when phone like '(256)%' then 'Uganda'
-           end
-           as country
-from customer;
+CREATE TABLE departments
+(department_id NUMBER(4) primary key AUTO_INCREMENT,
+department_name VARCHAR2(30),
+manager_id NUMBER(6));
+
+
+CREATE TABLE employees
+(employee_id NUMBER(6) primary key AUTO_INCREMENT,
+first_name VARCHAR2(20),
+last_name VARCHAR2(25),
+email VARCHAR2(25),
+phone_number VARCHAR2(20),
+hire_date DATE,
+salary NUMBER(8,2),
+manager_id NUMBER(6),
+department_id NUMBER(4));

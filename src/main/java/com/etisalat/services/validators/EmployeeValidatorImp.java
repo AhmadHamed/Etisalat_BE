@@ -11,12 +11,10 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-@Slf4j
 public class EmployeeValidatorImp implements IEmployeeValidator {
   private final EmployeeRepo employeeRepo;
   private final DepartmentRepo departmentRepo;
@@ -29,22 +27,20 @@ public class EmployeeValidatorImp implements IEmployeeValidator {
   }
 
   private void validateManagerExists(Integer manager_id) {
-    Optional<Employee> manager = Optional.empty();
     if (Objects.nonNull(manager_id)) {
-      manager = employeeRepo.findById(manager_id);
-    }
-    if (manager.isEmpty()) {
-      throw new NoSuchElementException();
+      Optional<Employee> manager = employeeRepo.findById(manager_id);
+      if (manager.isEmpty()) {
+        throw new NoSuchElementException();
+      }
     }
   }
 
   private void validateDepartmentExists(Integer department_id) {
-    Optional<Department> department = Optional.empty();
     if (Objects.nonNull(department_id)) {
-      department = departmentRepo.findById(department_id);
-    }
-    if (department.isEmpty()) {
-      throw new NoSuchElementException();
+      Optional<Department> department = departmentRepo.findById(department_id);
+      if (department.isEmpty()) {
+        throw new NoSuchElementException();
+      }
     }
   }
 

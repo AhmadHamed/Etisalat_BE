@@ -1,6 +1,5 @@
 package com.etisalat.entities;
 
-import java.math.BigDecimal;
 import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,6 +14,6 @@ public class Department {
   @Column(name = "department_id")
   private Integer id;
 
-  private String department_name;
-  private Integer manager_id;
+  @Column String department_name;
+  @Column private Integer manager_id;
 }

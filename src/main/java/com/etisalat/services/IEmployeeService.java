@@ -1,9 +1,11 @@
 package com.etisalat.services;
 
 import com.etisalat.entities.Employee;
+import com.etisalat.requestbodies.EmployeeUpdateRequest;
 import java.util.List;
 import java.util.Optional;
-import com.etisalat.requestbodies.EmployeeCreateRequest;import org.springframework.data.domain.Pageable;
+import javax.validation.Valid;
+import org.springframework.data.domain.Pageable;
 
 public interface IEmployeeService {
   List<Employee> getPaginatedEmployees(Pageable pageable);
@@ -11,4 +13,8 @@ public interface IEmployeeService {
   Optional<Employee> getEmployeeById(Integer id);
 
   void deleteEmployeeById(Integer id);
-void createEmployee(EmployeeCreateRequest createRequest);}
+
+  void createEmployee(@Valid Employee createRequest);
+
+  void updateEmployee(EmployeeUpdateRequest updateRequest, Integer id);
+}

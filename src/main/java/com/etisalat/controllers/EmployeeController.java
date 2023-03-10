@@ -1,10 +1,11 @@
 package com.etisalat.controllers;
 
 import com.etisalat.entities.Employee;
-import com.etisalat.requestbodies.EmployeeCreateRequest;
+import com.etisalat.requestbodies.EmployeeUpdateRequest;
 import com.etisalat.services.IEmployeeService;
 import java.util.List;
 import java.util.Optional;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -21,17 +22,25 @@ public class EmployeeController {
   private final IEmployeeService employeeService;
 
   /**
-   * @return created Employee
+   * @return Http 201 Created
    */
   @PostMapping
-  public ResponseEntity.BodyBuilder createEmployee(@RequestBody EmployeeCreateRequest createRequest) {
+  public ResponseEntity.BodyBuilder createEmployee(@Valid @RequestBody Employee createRequest) {
     employeeService.createEmployee(createRequest);
     return ResponseEntity.status(HttpStatus.CREATED);
   }
   /**
+   * @return newly created Employee
+   */
+  @PatchMapping(path = "/{id}")
+  public ResponseEntity.BodyBuilder updateEmployee(
+      @Valid @RequestBody EmployeeUpdateRequest updateRequest, @PathVariable Integer id) {
+    employeeService.updateEmployee(updateRequest, id);
+    return ResponseEntity.status(HttpStatus.OK);
+  }
+  /**
    * @return single Employee
    */
-
   @GetMapping(path = "/{id}")
   public ResponseEntity<Employee> getEmployee(@PathVariable Integer id) {
     Optional<Employee> employee = employeeService.getEmployeeById(id);

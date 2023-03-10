@@ -4,7 +4,9 @@ import static com.etisalat.utils.ErrorMessages.*;
 
 import java.util.Date;
 import javax.persistence.*;
-import javax.validation.constraints.Pattern;import javax.validation.constraints.Positive;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,24 +21,28 @@ public class Employee {
   @Column(name = "employee_id")
   private Integer id;
 
-  @Column(nullable = false)
+  @Column
+  @NotNull
   @Size(min = 2, message = FIRST_NAME_LESS_THAN_2)
   private String first_name;
 
-  @Column(nullable = false)
+  @Column
+  @NotNull
   @Size(min = 2, message = LAST_NAME_LESS_THAN_2)
   private String last_name;
 
-  private String email;
+  @Column private String email;
 
+  @Column
   @Pattern(regexp = "@\"^[0-9-]*$\"")
   private String phone_number;
 
-  private Date hire_date;
+  @Column private Date hire_date;
 
+  @Column
   @Positive(message = SALARY_GREATER_THAN_0)
   private Integer salary;
 
-  private Integer manager_id;
-  private Integer department_id;
+  @Column private Integer manager_id;
+  @Column private Integer department_id;
 }

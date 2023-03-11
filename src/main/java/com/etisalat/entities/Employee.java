@@ -16,8 +16,13 @@ import lombok.Setter;
 @Getter
 @Table(name = "employees")
 public class Employee {
+
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "employee_id_sequence_generator")
+  @SequenceGenerator(
+      name = "employee_id_sequence_generator",
+      sequenceName = "employee_id_sequence",
+      allocationSize = 1)
   @Column(name = "employee_id")
   private Integer id;
 

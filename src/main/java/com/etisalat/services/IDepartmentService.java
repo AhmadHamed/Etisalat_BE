@@ -14,4 +14,6 @@ public interface IDepartmentService {
   void createDepartment(Department createRequest);
 
   void updateDepartment(DepartmentUpdateRequest updateRequest, Integer id);
+
+  void deleteDepartmentById(Integer id);
 }

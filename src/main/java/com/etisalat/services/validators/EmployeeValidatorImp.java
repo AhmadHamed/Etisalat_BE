@@ -26,6 +26,12 @@ public class EmployeeValidatorImp implements IEmployeeValidator {
     validateDepartmentExists(updateRequest.getDepartment_id());
   }
 
+  @Override
+  public void validateCreateEmployeeRequest(Employee createRequest) {
+    validateManagerExists(createRequest.getManager_id());
+    validateDepartmentExists(createRequest.getDepartment_id());
+  }
+
   private void validateManagerExists(Integer manager_id) {
     if (Objects.nonNull(manager_id)) {
       Optional<Employee> manager = employeeRepo.findById(manager_id);

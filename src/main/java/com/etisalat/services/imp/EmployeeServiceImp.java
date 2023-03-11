@@ -4,12 +4,12 @@ import com.etisalat.entities.Employee;
 import com.etisalat.repos.EmployeeRepo;
 import com.etisalat.requestbodies.EmployeeUpdateRequest;
 import com.etisalat.services.IEmployeeService;
+import com.etisalat.services.validators.IEmployeeValidator;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
-import com.etisalat.services.validators.IEmployeeValidator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
@@ -25,11 +25,12 @@ public class EmployeeServiceImp implements IEmployeeService {
   @Override
   public void createEmployee(@Valid Employee createRequest) {
     log.info("creating new employee with data: {} at: {}", createRequest, LocalDateTime.now());
+    iEmployeeValidator.validateCreateEmployeeRequest(createRequest);
     employeeRepo.save(createRequest);
   }
 
   @Override
-  public void updateEmployee(EmployeeUpdateRequest updateRequest, Integer id) {
+  public void updateEmployee(@Valid EmployeeUpdateRequest updateRequest, Integer id) {
     log.info("Updating employee with id: {} at: {}", id, LocalDateTime.now());
     iEmployeeValidator.validateUpdateEmployeeRequest(updateRequest, id);
     Optional<Employee> employee = getEmployeeById(id);

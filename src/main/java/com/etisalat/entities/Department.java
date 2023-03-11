@@ -12,7 +12,13 @@ import lombok.Setter;
 @Table(name = "departments")
 public class Department {
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(
+      strategy = GenerationType.SEQUENCE,
+      generator = "department_id_sequence_generator")
+  @SequenceGenerator(
+      name = "department_id_sequence_generator",
+      sequenceName = "department_id_sequence",
+      allocationSize = 1)
   @Column(name = "department_id")
   private Integer id;
 

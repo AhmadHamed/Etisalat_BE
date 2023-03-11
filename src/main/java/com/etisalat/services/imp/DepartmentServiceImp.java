@@ -24,6 +24,7 @@ public class DepartmentServiceImp implements IDepartmentService {
   @Override
   public void createDepartment(Department createRequest) {
     log.info("creating new department with data: {} at: {}", createRequest, LocalDateTime.now());
+    departmentValidator.validateManagerExists(createRequest.getManager_id());
     departmentRepo.save(createRequest);
   }
 
@@ -40,6 +41,12 @@ public class DepartmentServiceImp implements IDepartmentService {
               updateRequest.getUpdatedDepartment(foundDepartment, updateRequest);
           departmentRepo.save(updatedDepartment);
         });
+  }
+
+  @Override
+  public void deleteDepartmentById(Integer id) {
+    log.info("Deleting department with id: {} at: {}", id, LocalDateTime.now());
+    departmentRepo.deleteById(id);
   }
 
   @Override

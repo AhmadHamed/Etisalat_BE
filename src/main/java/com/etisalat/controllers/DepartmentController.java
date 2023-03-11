@@ -14,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/department")
+@RequestMapping("/departments")
 @CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 public class DepartmentController {
@@ -25,18 +25,18 @@ public class DepartmentController {
    * @return Http 201 Created
    */
   @PostMapping
-  public ResponseEntity.BodyBuilder createDepartment(@Valid @RequestBody Department createRequest) {
+  public ResponseEntity<Department> createDepartment(@Valid @RequestBody Department createRequest) {
     departmentService.createDepartment(createRequest);
-    return ResponseEntity.status(HttpStatus.CREATED);
+    return new ResponseEntity<>(HttpStatus.CREATED);
   }
   /**
    * @return newly created Employee
    */
   @PatchMapping(path = "/{id}")
-  public ResponseEntity.BodyBuilder updateEmployee(
+  public ResponseEntity<Department> updateDepartment(
       @Valid @RequestBody DepartmentUpdateRequest updateRequest, @PathVariable Integer id) {
     departmentService.updateDepartment(updateRequest, id);
-    return ResponseEntity.status(HttpStatus.OK);
+    return new ResponseEntity<>(HttpStatus.OK);
   }
   /**
    * @return single Department
@@ -55,5 +55,16 @@ public class DepartmentController {
       @PageableDefault Pageable pageable) {
     List<Department> paginatedDepartments = departmentService.getPaginatedDepartments(pageable);
     return ResponseEntity.ok(paginatedDepartments);
+  }
+
+  /**
+   * deletes a department by id
+   *
+   * @return status 204 No Content
+   */
+  @DeleteMapping(path = "/{id}")
+  public ResponseEntity<Department> deleteDepartment(@PathVariable Integer id) {
+    departmentService.deleteDepartmentById(id);
+    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }
 }

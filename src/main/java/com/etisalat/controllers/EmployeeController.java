@@ -14,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/employee")
+@RequestMapping("/employees")
 @CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 public class EmployeeController {
@@ -25,18 +25,18 @@ public class EmployeeController {
    * @return Http 201 Created
    */
   @PostMapping
-  public ResponseEntity.BodyBuilder createEmployee(@Valid @RequestBody Employee createRequest) {
+  public ResponseEntity<Employee> createEmployee(@Valid @RequestBody Employee createRequest) {
     employeeService.createEmployee(createRequest);
-    return ResponseEntity.status(HttpStatus.CREATED);
+    return new ResponseEntity<>(HttpStatus.CREATED);
   }
   /**
    * @return newly created Employee
    */
   @PatchMapping(path = "/{id}")
-  public ResponseEntity.BodyBuilder updateEmployee(
+  public ResponseEntity<Employee> updateEmployee(
       @Valid @RequestBody EmployeeUpdateRequest updateRequest, @PathVariable Integer id) {
     employeeService.updateEmployee(updateRequest, id);
-    return ResponseEntity.status(HttpStatus.OK);
+    return new ResponseEntity<>(HttpStatus.OK);
   }
   /**
    * @return single Employee
@@ -58,11 +58,11 @@ public class EmployeeController {
   /**
    * deletes an employee by id
    *
-   * @return status 204 DELETED
+   * @return status 204 No Content
    */
   @DeleteMapping(path = "/{id}")
-  public ResponseEntity.BodyBuilder deleteEmployee(@PathVariable Integer id) {
+  public ResponseEntity<Employee> deleteEmployee(@PathVariable Integer id) {
     employeeService.deleteEmployeeById(id);
-    return ResponseEntity.status(204);
+    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }
 }

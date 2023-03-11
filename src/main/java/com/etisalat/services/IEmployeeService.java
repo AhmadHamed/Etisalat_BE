@@ -16,5 +16,5 @@ public interface IEmployeeService {
 
   void createEmployee(@Valid Employee createRequest);
 
-  void updateEmployee(EmployeeUpdateRequest updateRequest, Integer id);
+  void updateEmployee(@Valid EmployeeUpdateRequest updateRequest, Integer id);
 }

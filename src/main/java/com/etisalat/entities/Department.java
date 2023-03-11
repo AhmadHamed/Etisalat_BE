@@ -5,11 +5,13 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Setter
 @Getter
 @Table(name = "departments")
+@ToString
 public class Department {
   @Id
   @GeneratedValue(

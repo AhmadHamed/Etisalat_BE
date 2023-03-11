@@ -16,7 +16,7 @@ public class EmployeeUpdateRequest {
 
   @Email private String email;
 
-  @Pattern(regexp = "@\"^[0-9-]*$\"")
+  @Pattern(regexp = "^([0-9]+-)*[0-9]+$")
   private String phone_number;
 
   @Positive(message = SALARY_GREATER_THAN_0)

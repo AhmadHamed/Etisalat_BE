@@ -49,6 +49,7 @@ public class DepartmentIntegrationTests extends EtisalatProgrammingExerciseTestA
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{ \"manager_id\": \"1\" , \"department_name\": \"Logistics\" }")
                 .accept(MediaType.APPLICATION_JSON))
+        .andDo(print())
         .andExpect(status().isCreated());
   }
 
@@ -62,6 +63,7 @@ public class DepartmentIntegrationTests extends EtisalatProgrammingExerciseTestA
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{ \"manager_id\": \"2\" , \"department_name\": \"Logistics\" }")
                 .accept(MediaType.APPLICATION_JSON))
+        .andDo(print())
         .andExpect(status().isOk());
   }
 
@@ -71,6 +73,7 @@ public class DepartmentIntegrationTests extends EtisalatProgrammingExerciseTestA
   public void deleteDepartmentTest() throws Exception {
     this.mockMvc
         .perform(delete("/departments/3").contentType(MediaType.APPLICATION_JSON))
+        .andDo(print())
         .andExpect(status().isNoContent());
   }
 }

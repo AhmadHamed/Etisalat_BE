@@ -30,7 +30,7 @@ public class DepartmentController {
     return new ResponseEntity<>(HttpStatus.CREATED);
   }
   /**
-   * @return newly created Employee
+   * @return Http 200 OK
    */
   @PatchMapping(path = "/{id}")
   public ResponseEntity<Department> updateDepartment(

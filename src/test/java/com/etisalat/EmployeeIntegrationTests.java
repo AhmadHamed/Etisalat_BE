@@ -48,9 +48,10 @@ public class EmployeeIntegrationTests extends EtisalatProgrammingExerciseTestApp
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(
                     "{ \"first_name\": \"Arturo\", \"last_name\": \"Coello\", \"email\": \"Coello@Wpt.com\","
-                        + "\"phone_number\": \"010000000\", \"hire_date\": \"2023-01-01\" , \"salary\": \"1000\" ,"
+                        + "\"phone_number\": \"010-0000-00\", \"hire_date\": \"2023-01-01\" , \"salary\": \"1000\" ,"
                         + "\"manager_id\": \"1\" , \"department_id\": \"1\" }")
                 .accept(MediaType.APPLICATION_JSON))
+        .andDo(print())
         .andExpect(status().isCreated());
   }
 
@@ -67,6 +68,7 @@ public class EmployeeIntegrationTests extends EtisalatProgrammingExerciseTestApp
                         + "\"phone_number\": \"010000000\", \"salary\": \"1000\" ,"
                         + "\"manager_id\": \"2\" , \"department_id\": \"2\" }")
                 .accept(MediaType.APPLICATION_JSON))
+        .andDo(print())
         .andExpect(status().isOk());
   }
 
@@ -76,6 +78,7 @@ public class EmployeeIntegrationTests extends EtisalatProgrammingExerciseTestApp
   public void deleteEmployeeTest() throws Exception {
     this.mockMvc
         .perform(delete("/employees/3").contentType(MediaType.APPLICATION_JSON))
+        .andDo(print())
         .andExpect(status().isNoContent());
   }
 }

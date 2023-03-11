@@ -10,11 +10,13 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Setter
 @Getter
 @Table(name = "employees")
+@ToString
 public class Employee {
 
   @Id
@@ -39,7 +41,7 @@ public class Employee {
   @Column private String email;
 
   @Column
-  @Pattern(regexp = "@\"^[0-9-]*$\"")
+  @Pattern(regexp = "^([0-9]+-)*[0-9]+$")
   private String phone_number;
 
   @Column private Date hire_date;
